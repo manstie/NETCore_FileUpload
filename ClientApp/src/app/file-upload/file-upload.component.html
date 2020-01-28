@@ -1,0 +1,12 @@
+
+<form>
+  <input #file type="file" (change)="selectedFile(file.files)" accept=".pdf,.doc,.docx" style="display:none"/><br />
+  <button type="button" class="btn btn-primary" (click)="file.click()">Upload File</button>
+</form>
+
+<div *ngIf="success" class ="alert alert-success" role="alert">
+  File uploaded successfully.
+</div>
+<div *ngIf="err != ''" class="alert alert-danger" role="alert">
+  {{err}}
+</div>

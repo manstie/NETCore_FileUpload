@@ -1,0 +1,22 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>File Name</th>
+        <th>Upload Time</th>
+        <th>File Size</th>
+        <th>SHA1</th>
+        <th>MD5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <td>{{ file.name }}</td>
+        <td>{{ file.upload | date: 'short' }}</td>
+        <td>{{ file.size }}</td>
+        <td>{{ file.sha1 }}</td>
+        <td>{{ file.md5 }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
