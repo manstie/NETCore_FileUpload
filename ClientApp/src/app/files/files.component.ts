@@ -1,21 +1,20 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileData } from '../shared/filedata';
 
 @Component({
   selector: 'app-files',
-  templateUrl: './files.component.html'
+  templateUrl: './files.component.html',
 })
 export class FilesComponent implements OnInit {
 
-  public files: FileData[];
-  private baseUrl: string;
-  private http: HttpClient;
+  private files: FileData[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string)
+  constructor(private http: HttpClient,
+              private _ngZone: NgZone,
+              @Inject('BASE_URL') private baseUrl: string)
   {
-    this.baseUrl = baseUrl;
-    this.http = http;
+
   }
 
   ngOnInit()
@@ -25,12 +24,23 @@ export class FilesComponent implements OnInit {
 
   refreshData()
   {
+    console.log("Before: " + this.files);
     this.http.get<FileData[]>(this.baseUrl + 'FileData/Files').subscribe(result =>
     {
       this.files = result;
       console.log(this.files);
     }, error => console.error("Everything is terrible: " + error));
+
+    console.log("After: " + this.files);
   }
+
+  /*
+  async refreshData()
+  {
+    const data = await this.http.get<FileData[]>(this.baseUrl + 'FileData/Files').toPromise();
+    this.files = data;
+    console.log(data);
+  }*/
 
 }
 
