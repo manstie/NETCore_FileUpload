@@ -57,6 +57,9 @@ namespace netcore_fileupload.Controllers
                         MD5 = HashString.GetMD5Hash(file.OpenReadStream())
                     });
                     System.Diagnostics.Debug.WriteLine("File added: " + Program.filesDB[Program.filesDB.Count-1].ToString());
+                    System.Diagnostics.Debug.WriteLine("PDF: " + FileValidity.isPDF(file.OpenReadStream()));
+                    System.Diagnostics.Debug.WriteLine("DOC: " + FileValidity.isDOC(file.OpenReadStream()));
+                    System.Diagnostics.Debug.WriteLine("DOCX: " + FileValidity.isDOCX(file.OpenReadStream()));
                 }
 
                 return Ok();
