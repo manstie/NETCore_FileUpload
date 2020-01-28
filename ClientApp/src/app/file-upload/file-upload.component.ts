@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, NgZone } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { FilesComponent } from '../files/files.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -9,11 +10,12 @@ export class FileUploadComponent implements OnInit {
 
   private err: string;
   private success: boolean;
-  private baseUrl: string;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string)
+  constructor(private http: HttpClient,
+              private filesTable: FilesComponent,
+              private _ngZone: NgZone,
+              @Inject('BASE_URL') private baseUrl: string)
   {
-    this.baseUrl = baseUrl;
     this.clearNotifications();
   }
 
@@ -21,7 +23,7 @@ export class FileUploadComponent implements OnInit {
 
   }
 
-  selectedFile(files)
+  async selectedFile(files)
   {
     this.clearNotifications();
 
@@ -35,10 +37,9 @@ export class FileUploadComponent implements OnInit {
         console.log("Post file: " + file.name);
       }
       //todo: report progress? report error during post?
-      this.http.post(this.baseUrl + 'FileData/Add', formData).subscribe(result =>
-      {
-        console.log("Post: " + result);
-      }, error => console.error("Everything is terrible: " + error));
+      await this.http.post(this.baseUrl + 'FileData/Add', formData).toPromise();
+      this.success = true;
+      await this.filesTable.refreshData();
     }
     else
     {

@@ -59,9 +59,9 @@ namespace netcore_fileupload.Controllers
 
         private static string GetHash(Stream s, HashAlgorithm hasher)
         {
-            var hash = hasher.ComputeHash(s);
-            var hashStr = Convert.ToBase64String(hash);
-            return hashStr.TrimEnd('=');
+            byte[] hash = hasher.ComputeHash(s);
+            string hashStr = BitConverter.ToString(hash);
+            return hashStr.Replace("-", string.Empty).ToLower();
         }
     }
 }

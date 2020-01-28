@@ -11,6 +11,9 @@ namespace netcore_fileupload
 {
     public class Program
     {
+        //Store "database" here as just session memory
+        public static List<FileData> filesDB = new List<FileData>();
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

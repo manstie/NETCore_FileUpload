@@ -21,12 +21,11 @@ import { FilesComponent } from './files/files.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: FileUploadComponent, pathMatch: 'full' },
+      { path: 'upload', component: FileUploadComponent },
       { path: 'files', component: FilesComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [],
+  providers: [FilesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,8 +13,6 @@ namespace netcore_fileupload.Controllers
     [Route("[controller]")]
     public class FileDataController : ControllerBase
     {
-        private List<FileData> filesDB = new List<FileData>();
-
         private readonly ILogger<FileDataController> _logger;
 
         public FileDataController(ILogger<FileDataController> logger)
@@ -26,9 +24,9 @@ namespace netcore_fileupload.Controllers
         public IEnumerable<FileData> Get()
         {
             System.Diagnostics.Debug.WriteLine("The get endpoint has been called.");
-            if(filesDB.Count > 0)
+            if (Program.filesDB.Count > 0)
             {
-                return filesDB.ToArray();
+                return Program.filesDB.ToArray();
             }
             else
             {
@@ -50,18 +48,15 @@ namespace netcore_fileupload.Controllers
 
                 foreach (var file in formFiles)
                 {
-                    var stream = new MemoryStream();
-                    file.OpenReadStream().CopyTo(stream);
-
-                    filesDB.Add(new FileData
+                    Program.filesDB.Add(new FileData
                     {
-                        Filename = file.FileName,
+                        FileName = file.FileName,
                         UploadTime = DateTime.Now,
                         Bytes = file.Length,
-                        SHA1 = HashString.GetSHA1Hash(stream),
-                        MD5 = HashString.GetMD5Hash(stream)
+                        SHA1 = HashString.GetSHA1Hash(file.OpenReadStream()),
+                        MD5 = HashString.GetMD5Hash(file.OpenReadStream())
                     });
-                    System.Diagnostics.Debug.WriteLine("File added: " + file.FileName);
+                    System.Diagnostics.Debug.WriteLine("File added: " + Program.filesDB[Program.filesDB.Count-1].ToString());
                 }
 
                 return Ok();

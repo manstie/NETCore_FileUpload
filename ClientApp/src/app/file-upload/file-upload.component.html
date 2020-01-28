@@ -1,12 +1,16 @@
-
-<form>
-  <input #file type="file" (change)="selectedFile(file.files)" accept=".pdf,.doc,.docx" style="display:none"/><br />
-  <button type="button" class="btn btn-primary" (click)="file.click()">Upload File</button>
-</form>
-
-<div *ngIf="success" class ="alert alert-success" role="alert">
-  File uploaded successfully.
+<div class="row">
+  <div class="col-xs-6">
+    <div *ngIf="success" class="alert alert-success mb-0 py-2 px-3" role="alert">
+      File uploaded successfully.
+    </div>
+    <div *ngIf="err != ''" class="alert alert-danger mb-0 py-2 px-3" role="alert">
+      {{err}}
+    </div>
+  </div>
+  <form class="col-xs-6 my-auto ml-2">
+    <input #file type="file" (change)="selectedFile(file.files)" accept=".pdf,.doc,.docx" style="display:none" />
+    <button type="button" class="btn btn-primary" (click)="file.click()">Upload File</button>
+  </form>
 </div>
-<div *ngIf="err != ''" class="alert alert-danger" role="alert">
-  {{err}}
-</div>
+
+
