@@ -23,7 +23,7 @@ export class FileUploadComponent implements OnInit {
 
   }
 
-  async selectedFile(files)
+  selectedFile(files)
   {
     this.clearNotifications();
 
@@ -37,9 +37,13 @@ export class FileUploadComponent implements OnInit {
         console.log("Post file: " + file.name);
       }
       //todo: report progress? report error during post?
-      await this.http.post(this.baseUrl + 'FileData/Add', formData).toPromise();
-      this.success = true;
-      await this.filesTable.refreshData();
+
+      this.http.post(this.baseUrl + 'FileData/Add', formData).subscribe(result =>
+      {
+        this.success = true;
+        this.filesTable.refreshData();
+      }, error => console.error("Everything is terrible: " + error));
+
     }
     else
     {
