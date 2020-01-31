@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-6">
+    <div *ngIf="progress >= 0">{{progress}}%</div>
     <div *ngIf="success" class="alert alert-success mb-0 py-2 px-3" role="alert">
       File uploaded successfully.
     </div>
@@ -12,5 +13,3 @@
     <button type="button" class="btn btn-primary" (click)="file.click()">Upload File</button>
   </form>
 </div>
-
-

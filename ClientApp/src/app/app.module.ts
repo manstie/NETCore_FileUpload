@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FilesComponent } from './files/files.component';
+import { FileDataService } from './shared/filedata.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     FileUploadComponent,
-    FilesComponent
+    FilesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,7 +26,7 @@ import { FilesComponent } from './files/files.component';
       { path: 'files', component: FilesComponent },
     ])
   ],
-  providers: [FilesComponent],
+  providers: [FileDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
