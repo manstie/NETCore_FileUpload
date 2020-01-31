@@ -11,7 +11,7 @@ namespace netcore_fileupload
 {
     public class Program
     {
-        //Store "database" here as just session memory
+        //Store "database" here for just the session of the server
         public static List<FileData> filesDB = new List<FileData>();
 
         public static void Main(string[] args)
