@@ -11,11 +11,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let file of files">
-        <td>{{ file.fileName }}</td>
+        <td class="text-break">{{ file.fileName }}</td>
         <td>{{ file.uploadTime | date: 'yyyy/MM/dd h:mm a' }}</td>
         <td>{{ file.fileSize }}</td>
-        <td class="text-monospace">{{ file.shA1 }}</td>
-        <td class="text-monospace">{{ file.mD5 }}</td>
+        <td class="text-monospace text-break">{{ file.shA1 }}</td>
+        <td class="text-monospace text-break">{{ file.mD5 }}</td>
       </tr>
     </tbody>
   </table>

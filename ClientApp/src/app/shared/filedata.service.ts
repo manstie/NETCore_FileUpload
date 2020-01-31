@@ -15,13 +15,13 @@ export interface FileData
 @Injectable()
 export class FileDataService
 {
-  private messageSource = new BehaviorSubject<FileData[]> (null);
+  public messageSource = new BehaviorSubject<FileData[]> (null);
   public currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string)
   {
-    
+    this.refreshData();
   }
 
   refreshData()
