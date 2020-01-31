@@ -4,7 +4,7 @@ namespace netcore_fileupload
 {
     public class FileData
     {
-        //see https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
+        //https://en.wikipedia.org/wiki/Orders_of_magnitude_(data)
         private readonly string[] sizes = { "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
         public string FileName { get; set; }
